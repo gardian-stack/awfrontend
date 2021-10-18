@@ -3,8 +3,17 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import Dropdown from './Dropdown';
+import img from '../../images/logo.png'
 
 function Navbar() {
+
+  const axios = require('axios');
+
+  axios.get('https://staging-am.awalmula.co.id/rest/default/V1/categories')
+  .then(function (response) {
+    // console.log(response.data.children_data[0]);
+  })
+  
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
 
@@ -31,48 +40,34 @@ function Navbar() {
     <>
       <nav className='navbar'>
         <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-          AW
-          <i class='fab fa-firstdraft' />
+          <img src={img} alt ="a" className="img_logo" style={{width:"50px"}} />
+          <i className='fab fa-firstdraft' />
         </Link>
         <div className='menu-icon' onClick={handleClick}>
           <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
         </div>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-          <li className='nav-item'>
-            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+          {/* <li className='nav-item'>
+            <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
               Home
             </Link>
-          </li>
-          <li
-            className='nav-item'
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
-            <Link
-              to='/services'
-              className='nav-links'
-              onClick={closeMobileMenu}
-            >
-              Services <i className='fas fa-caret-down' />
-            </Link>
-            {dropdown && <Dropdown />}
-          </li>
+          </li> */}
           <li className='nav-item'>
             <Link
-              to='/products'
+              to='/food'
               className='nav-links'
               onClick={closeMobileMenu}
             >
-              Products
+              Food & Beverages
             </Link>
           </li>
           <li className='nav-item'>
             <Link
-              to='/contact-us'
+              to='/health'
               className='nav-links'
               onClick={closeMobileMenu}
             >
-              Contact Us
+              Health & Wellness
             </Link>
           </li>
           <li>
